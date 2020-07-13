@@ -1,8 +1,14 @@
+import { AuthComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 
 const routes: Routes = [
+  {
+    path: 'auth',
+    component: AuthComponent,
+    loadChildren: () => import('./auth/auth.module').then(m=>m.AuthModule)
+  },
   {
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
@@ -20,8 +26,12 @@ const routes: Routes = [
   }
 ];
 
+const config: ExtraOptions = {
+  useHash: true,
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
