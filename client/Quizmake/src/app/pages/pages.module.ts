@@ -1,4 +1,3 @@
-import { CreateQuizModule } from './create-quiz/create-quiz.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +10,6 @@ import { PagesComponent } from './pages.component';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    CreateQuizModule
   ]
 })
 export class PagesModule { }

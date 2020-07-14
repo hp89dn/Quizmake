@@ -9,18 +9,18 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
-        path: 'create-quiz',
-        loadChildren: () => import('./create-quiz/create-quiz.module').then(m => m.CreateQuizModule)
+        path: 'lecturer-page',
+        loadChildren: () => import('./lecturer-page/lecturer-page.module')
+          .then(m => m.LecturerPageModule)
       },
       {
         path: '',
-        redirectTo: 'create-quiz',
+        redirectTo: 'lecturer-page',
         pathMatch: 'full',
       },
       {
         path: '**',
-        redirectTo: 'create-quiz',
-        pathMatch: 'full',
+        redirectTo: 'lecturer-page'
       },
     ]
   }
