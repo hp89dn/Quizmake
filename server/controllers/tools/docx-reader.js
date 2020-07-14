@@ -23,8 +23,9 @@ exports.docxReader = (req, res, next) => {
       text_list.forEach((q) => {
         const quiz_split = q.split("\n"); // split lines of text to elements of array
         const len = quiz_split.length; // length of array of elements splited text
-        const question = quiz_split.slice(1, len - 4).join('\n'); // ['Trả lời câu hỏi sau:', '1+1=?'] => "Trả lời câu hỏi sau:\n1+1=?""
         
+        const point_string = quiz_split[0];
+        const question = quiz_split.slice(1, len - 4).join('\n'); // ['Trả lời câu hỏi sau:', '1+1=?'] => "Trả lời câu hỏi sau:\n1+1=?""
         // list of answers
         const answer_list = quiz_split.slice(len - 4, len); // get list answers
         const correct = String(
@@ -34,7 +35,7 @@ exports.docxReader = (req, res, next) => {
         
         // create quiz object
         const quiz = {
-          point: quiz_split[0],
+          point: point_string,
           question: question,
           answer: replaced_answer,
           correct: correct,
