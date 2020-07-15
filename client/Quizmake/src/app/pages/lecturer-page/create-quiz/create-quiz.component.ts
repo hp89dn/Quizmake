@@ -1,6 +1,10 @@
-
 import { Component, OnInit } from "@angular/core";
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from "@angular/cdk/drag-drop";
+
 @Component({
   selector: "app-create-quiz",
   templateUrl: "./create-quiz.component.html",
@@ -12,59 +16,39 @@ export class CreateQuizComponent implements OnInit {
   point: number;
   public question: string;
   public answerList: any[] = [
-    {
-      answer: ''
-    },
-    {
-      answer: ''
-    },
-    {
-      answer: ''
-    },
-    {
-      answer: ''
-    }
-  ]
+    '', '', '', ''
+  ];
 
   quizList = [
     {
-      point: '(1 pount)',
-      question: '1+1 = ?',
-      answerList: [
-        {
-          answer: 'A. 1'
-        },
-        {
-          answer: 'B. 2'
-        },
-        {
-          answer: 'C. 3'
-        },
-        {
-          answer: 'D. 4'
-        },
-      ],
-      correct: 'B. 2'
+      point: "(1 pount)",
+      question: "What is the scientific name of a butterfly?",
+      answerList: ["Apis", "Coleoptera", "Formicidae", "Rhopalocera"],
+      correct: "B. 2",
     },
     {
-      point: '(1 pount)',
-      question: '1+2 = ?',
+      point: "(1 pount)",
+      question: "How hot is the surface of the sun?",
+      answerList: ["1,233 K", "5,778 K", "12,130 K", "101,300 K"],
+      correct: "B. 2",
+    },
+    {
+      point: "(1 pount)",
+      question: "Who are the actors in The Internship?",
       answerList: [
-        {
-          answer: 'A. 1'
-        },
-        {
-          answer: 'B. 2'
-        },
-        {
-          answer: 'C. 3'
-        },
-        {
-          answer: 'D. 4'
-        },
+        "Ben Stiller, Jonah Hill",
+        "Courteney Cox, Matt LeBlanc",
+        "Kaley Cuoco, Jim Parsons",
+        "Vince Vaughn, Owen Wilson",
       ],
-      correct: 'C. 3'
-    }
+      correct: "B. 2",
+    },
+    {
+      point: "(1 pount)",
+      question: "What is the capital of Spain?",
+      answerList: ["Berlin", "Buenos Aires", "Madrid", "San Juan"],
+      correct: "C. 3",
+    },
   ];
 
   drop(event: CdkDragDrop<string[]>) {
@@ -72,13 +56,14 @@ export class CreateQuizComponent implements OnInit {
   }
 
   addAnswerBox() {
-    this.answerList.push({answer: ''});
+    this.answerList.push("");
   }
-  removeQuizBox(index) {
+  removeAnswerBox(index) {
     this.answerList.splice(index, 1);
   }
-
-  ngOnInit() {
-
+  removeQuizBox(index) {
+    this.quizList.splice(index, 1);
   }
+
+  ngOnInit() {}
 }

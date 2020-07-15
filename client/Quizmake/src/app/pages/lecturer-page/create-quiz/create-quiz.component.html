@@ -3,9 +3,10 @@
     <div class="col-6">
       <h2>Danh sách Câu hỏi trắc nghiệm</h2>
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box"  *ngFor="let quiz of quizList" cdkDrag>
+        <div class="example-box" *ngFor="let quiz of quizList; let i = index" cdkDrag>
           <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
           <form class="example-form">
+            <h2> Câu {{i + 1}}:</h2>
             <mat-form-field class="example-full-width">
               <mat-label>Nhập câu hỏi</mat-label>
               <textarea
@@ -38,7 +39,7 @@
                       <input
                         matInput
                         name="answer_{{ index }}"
-                        [(ngModel)]="a.answer"
+                        [(value)]="quiz.answerList[index]"
                         type="text"
                       />
                     </mat-form-field>
@@ -46,6 +47,16 @@
                 </div>
               </div>
             </mat-radio-group>
+            <div class="text-center">
+              <button
+                mat-mini-fab
+                color="warn"
+                aria-label="a add icon"
+                (click)="removeQuizBox(i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -90,13 +101,13 @@
                   <input
                     matInput
                     name="answer_{{ index }}"
-                    [(ngModel)]="a.answer"
+                    [(value)]="answerList[index]"
                     type="text"
                   />
                 </mat-form-field>
               </div>
               <div class="col-1">
-                <button mat-icon-button  color="warn" style="outline: none;" (click)="removeQuizBox(index)">
+                <button mat-icon-button  color="warn" style="outline: none;" (click)="removeAnswerBox(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
               </div>
