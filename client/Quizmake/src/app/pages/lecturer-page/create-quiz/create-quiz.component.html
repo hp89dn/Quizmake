@@ -1,3 +1,123 @@
-<div>
-    <app-add-quiz-dialog></app-add-quiz-dialog>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2>Danh sách Câu hỏi trắc nghiệm</h2>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box"  *ngFor="let quiz of quizList" cdkDrag>
+          <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Nhập câu hỏi</mat-label>
+              <textarea
+                matInput
+                type="text"
+                name="question-input"
+                [(ngModel)]="quiz.question"
+              ></textarea>
+              <button
+                mat-button
+                *ngIf="quiz.question"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="quiz.question = ''"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+    
+            <mat-radio-group aria-label="Select an option">
+              <div *ngFor="let a of quiz.answerList; let index = index">
+                <div class="row">
+                  <div class="col-1" style="padding-top: 1rem;">
+                    <mat-radio-button value="{{ index }}"></mat-radio-button>
+                  </div>
+                  <div class="col-11">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Câu trả lời {{ index + 1 }}</mat-label>
+                      <input
+                        matInput
+                        name="answer_{{ index }}"
+                        [(ngModel)]="a.answer"
+                        type="text"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </mat-radio-group>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <h2>Thêm câu hỏi trắc nghiệm</h2>
+
+      <button class="w-100" mat-stroked-button color="primary">
+        + Import from *.docx
+      </button>
+      <hr />
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nhập câu hỏi</mat-label>
+          <textarea
+            matInput
+            type="text"
+            name="question-input"
+            [(ngModel)]="question"
+          ></textarea>
+          <button
+            mat-button
+            *ngIf="question"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="question = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-radio-group aria-label="Select an option">
+          <div *ngFor="let a of answerList; let index = index">
+            <div class="row">
+              <div class="col-1" style="padding-top: 1rem;">
+                <mat-radio-button value="{{ index }}"></mat-radio-button>
+              </div>
+              <div class="col-10">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Câu trả lời {{ index + 1 }}</mat-label>
+                  <input
+                    matInput
+                    name="answer_{{ index }}"
+                    [(ngModel)]="a.answer"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-1">
+                <button mat-icon-button  color="warn" style="outline: none;" (click)="removeQuizBox(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-radio-group>
+        <div class="text-center">
+          <button
+            mat-mini-fab
+            color="accent"
+            aria-label="a add icon"
+            (click)="addAnswerBox()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <hr />
+        <button class="w-100" mat-raised-button color="primary">
+          Create
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
