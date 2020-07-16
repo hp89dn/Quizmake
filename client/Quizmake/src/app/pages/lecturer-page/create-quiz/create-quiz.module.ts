@@ -1,3 +1,4 @@
+import { UploadTaskComponent } from './upload-task/upload-task.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -15,8 +16,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { FormsModule } from "@angular/forms";
 
+import { DropzoneDirective } from '../directives/dropzone.directive';
+
+
 @NgModule({
-  declarations: [CreateQuizComponent],
+  declarations: [DropzoneDirective, CreateQuizComponent, UploadTaskComponent],
   imports: [
     CommonModule,
     CreateQuizRoutingModule,
