@@ -28,16 +28,13 @@ exports.docxReader = (req, res, next) => {
         const question = quiz_split.slice(1, len - 4).join('\n'); // ['Trả lời câu hỏi sau:', '1+1=?'] => "Trả lời câu hỏi sau:\n1+1=?""
         // list of answers
         const answer_list = quiz_split.slice(len - 4, len); // get list answers
-        const correct = String(
-          answer_list.find((ans) => ans.includes("*"))
-        ).replace("*", ""); // find correct answer and remove '*' in string
-        const replaced_answer = answer_list.map((a) => a.replace("*", "")); // remove '*' in list of answers
-        
+        const correct = answer_list.findIndex((ans) => ans.charAt(0) == '*'); // find index correct answer
+        answer_list[correct] = answer_list[correct].substring(1, this.length); // remove '*' of correct answer in answer-list
         // create quiz object
         const quiz = {
           point: point_string,
           question: question,
-          answer: replaced_answer,
+          answer: answer_list,
           correct: correct,
         };
         // push quiz to quiz-list
