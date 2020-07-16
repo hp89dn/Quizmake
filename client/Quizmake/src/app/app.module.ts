@@ -8,6 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { LoaderService } from './@base/services/loader.service';
+import { LoaderInterceptor } from '../app/loader.interceptor';
+import { APIInterceptor } from './interceptors/api.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
+import { BaseComponent } from './@base/base.component';
+import { HttpClientModule } from '@angular/common/http';
+
+
 // 1. Import the libs you need
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -34,6 +43,7 @@ firebase.initializeApp(environment.firebase);
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -45,7 +55,16 @@ firebase.initializeApp(environment.firebase);
     AngularFireAuthModule, // auth
     AngularFireStorageModule // storage
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: APIInterceptor,
+      multi: true
+    },
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

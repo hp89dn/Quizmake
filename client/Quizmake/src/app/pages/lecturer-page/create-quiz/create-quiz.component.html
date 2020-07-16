@@ -12,7 +12,7 @@
           <form class="example-form">
             <h2>Câu {{ i + 1 }}:</h2>
             <mat-form-field class="example-full-width">
-              <mat-label>Nhập câu hỏi</mat-label>
+              <h3>Nhập câu hỏi</h3>
               <textarea
                 matInput
                 type="text"
@@ -32,7 +32,7 @@
             </mat-form-field>
 
             <mat-radio-group aria-label="Select an option">
-              <div *ngFor="let a of quiz.answerList; let index = index">
+              <div *ngFor="let a of quiz.answers; let index = index">
                 <div class="row">
                   <div class="col-1" style="padding-top: 1rem;">
                     <mat-radio-button value="{{ index }}"></mat-radio-button>
@@ -43,7 +43,7 @@
                       <input
                         matInput
                         name="answer_{{ index }}"
-                        [(value)]="quiz.answerList[index]"
+                        [(value)]="quiz.answers[index]"
                         type="text"
                       />
                     </mat-form-field>
@@ -97,11 +97,9 @@
             </label>
           </div>
         </div>
-
         <h3>Uploads</h3>
-
         <div *ngFor="let file of files">
-          <app-upload-task [file]="file"></app-upload-task>
+          <app-upload-task (fileURL)="getQuizData($event)" [file]="file"></app-upload-task>
         </div>
       </div>
       <hr />
@@ -168,8 +166,13 @@
         </div>
         <hr />
         <button class="w-100" mat-raised-button color="primary">
-          Create
+          Thêm
         </button>
+        <hr>
+        <button class="w-100" mat-raised-button color="accent">
+          Lưu
+        </button>
+        <hr>
       </form>
     </div>
   </div>
