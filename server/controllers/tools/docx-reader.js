@@ -34,13 +34,12 @@ exports.docxReader = (req, res, next) => {
         const quiz = {
           point: point_string,
           question: question,
-          answer: answer_list,
+          answers: answer_list,
           correct: correct,
         };
         // push quiz to quiz-list
         quiz_list.push(quiz);
       });
-
       // return json to client
       res.status(200).json(
         quiz_list
