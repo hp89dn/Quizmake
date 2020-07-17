@@ -28,13 +28,13 @@ export class QuizManagementComponent implements OnInit {
       point: "(1 pount)",
       question: "What is the scientific name of a butterfly?",
       answers: ["Apis", "Coleoptera", "Formicidae", "Rhopalocera"],
-      correct: "B. 2",
+      correct: 0,
     },
     {
       point: "(1 pount)",
       question: "How hot is the surface of the sun?",
       answers: ["1,233 K", "5,778 K", "12,130 K", "101,300 K"],
-      correct: "B. 2",
+      correct: 1,
     },
     {
       point: "(1 pount)",
@@ -45,13 +45,13 @@ export class QuizManagementComponent implements OnInit {
         "Kaley Cuoco, Jim Parsons",
         "Vince Vaughn, Owen Wilson",
       ],
-      correct: "B. 2",
+      correct: 2,
     },
     {
       point: "(1 pount)",
       question: "What is the capital of Spain?",
       answers: ["Berlin", "Buenos Aires", "Madrid", "San Juan"],
-      correct: "C. 3",
+      correct: 2,
     },
   ];
 
@@ -94,6 +94,8 @@ export class QuizManagementComponent implements OnInit {
 
   updateForm() {
     this.quizList = [...this.quizList];
+    console.log(this.quizList);
+    
   }
 
   ngOnInit(): void {

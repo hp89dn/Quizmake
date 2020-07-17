@@ -187,22 +187,18 @@
                   </button>
                 </mat-form-field>
 
-                <mat-radio-group aria-label="Select an option">
-                  <mat-grid-list cols="2" rowHeight="8:1">
+                <mat-radio-group [(ngModel)]="quiz.correct" aria-label="Select an option">
+                  <mat-grid-list cols="2" rowHeight="6:1">
                     <mat-grid-tile
                       *ngFor="let a of quiz.answers; let index = index"
                     >
-                      <!-- <div class="row"> -->
-                      <!-- <div class="col-1" style="padding-top: 1rem;"> -->
-                      <mat-radio-button value="{{ index }}"></mat-radio-button>
-                      <!-- </div> -->
-                      <!-- <div class="col-11"> -->
+                      <mat-radio-button value="{{ index }}" [checked]="index == quiz.correct"></mat-radio-button>
                       <mat-form-field class="example-full-width">
                         <mat-label>Câu trả lời {{ index + 1 }}</mat-label>
                         <input
                           matInput
                           name="answer_{{ index }}"
-                          [(value)]="quiz.answers[index]"
+                          [(ngModel)]="quiz.answers[index]"
                           type="text"
                         />
                       </mat-form-field>
